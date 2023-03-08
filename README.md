@@ -26,18 +26,10 @@ FoodFactor is built using the MERN stack of technologies:
 
 # Installation
 To run FoodFactor on your local machine, follow these steps:
-1. Clone the repository. 
-2. Create and activate a virtual environment.
-  `python -m venv env`
-`source env/bin/activate`
-3. Install the required packages using pip.
-  `pip install -r requirements.txt`
-4. Run database migrations.
-  `python manage.py migrate`
-5. Create a superuser account for admin access.
-  `python manage.py createsuperuser`
-6. Start the development server.
-  `python manage.py runserver`
+1. Clone the repository.
+2. Run `npm install` in both the client and server directories to install the necessary dependencies.
+3. Set up a MongoDB database and update the `MONGODB_URI` environment variable in the `.env` file.
+4. Run `npm start` in both the client and server directories to start the development server.
   
  # Wire Frames & Entity Relationship Diagram 
  ### Log In
