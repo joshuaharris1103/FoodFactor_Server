@@ -60,3 +60,49 @@ To run FoodFactor on your local machine, follow these steps:
 Each entity has its own set of attributes that define the information that can be stored in it. For example, the users entity has attributes like username, email, and password that store user account information, while the recipes entity has attributes like title, description, and image that store recipe details.
 
 # Routes
+
+### Authentication: Users
+
+| **URL**              | **HTTP Verb** |**Actions**|
+|----------------------|---------------|-----------|
+| /auth/signup         | POST          | new       | 
+| /auth/login          | POST          | create    | 
+| /auth/logout         | DELETE        | destroy   |      
+| /auth/:id            | GET           | show      |        
+| /auth/:id            | PATCH         | update    |        
+
+### Recipes
+
+| **URL**              | **HTTP Verb** |**Actions**|
+|----------------------|---------------|-----------|
+| /                    | GET           | index
+| /recipe/:id          | GET           | show
+| /recipe/             | POST          | create
+| /recipe/:id          | PATCH         | update      
+| /recipe/:id          | DELETE        | destroy     
+
+### Ingredients
+
+| **URL**           | **HTTP Verb** |**Actions**|
+|-------------------|---------------|-----------|
+| /ingredients/     | GET           | index
+| /ingredients/     | POST          | create
+| /ingredients/:id/ | PATCH         | update  
+| /ingredients/:id/ | DELETE        | destroy  
+
+### Reviews
+
+| **URL**           | **HTTP Verb** |**Actions**|
+|-------------------|---------------|-----------|
+| /reviews/     | GET           | index
+| /reviews/     | POST          | create
+| /reviews/:id/ | PATCH         | update  
+| /reviews/:id/ | DELETE        | destroy  
+
+### Meal Plans
+
+| **URL**           | **HTTP Verb** |**Actions**|
+|-------------------|---------------|-----------|
+| /mealplan/     | GET           | index
+| /mealplan/     | POST          | create 
+| /mealplan/:id/ | DELETE        | destroy  
