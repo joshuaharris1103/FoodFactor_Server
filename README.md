@@ -1,181 +1,62 @@
-# express-auth-template
+# FoodFactor
+A social media platform for sharing recipes and meal ideas
 
-A template for starting projects with `express` as an API. Includes
-authentication and common middlewares.
+FoodFactor is a social media platform for food enthusiasts to share and discover new recipes. Users can sign up, log in, and create a profile. They can then create, read, update, and delete recipes, and share them with others. Users can also search for recipes based on keywords, ingredients, or categories.
 
-## Installation
+# Technologies Used
+FoodFactor is built using the MERN stack of technologies:
+- MongoDB for the database
+- Express.js for the server
+- React.js for the client
+- Node.js for the backend
+- Bootstrap 5 for the UI
 
-1. [Download](../../archive/master.zip) this template.
-1. Move the .zip file to your `sei/projects/` directory and Unzip it (creating a
-   folder) -- **NOTE:** if the folder was already unzipped, use the `mv` command
-   line to move it to the `sei/projects/` directory.
-1. Rename the directory from express-auth-template -> your-app-name.
-1. Rename [`README.md`](README.md) to `REF.md` and use as a reference, create a new README and fill with your own content.
-1. Move into the new project and `git init`.
-1. Replace all instances of `'express-auth-template'` with your app name.
-1. Install dependencies with `npm install`.
-1. Ensure that you have `nodemon` installed by running `npm install -g nodemon`.
-2. Once everything is working, make an initial commit.
+# User Interactions and Features:
+### As A User You will be able to:
+- User Authentication: Users can sign up, log in, and log out of the platform.
+- User Authorization: Different levels of authorization can be granted to users based on their roles.
+- Recipe CRUD Operations: Users can create, read, update, and delete recipes.
+- Meal Planning: Users can create a meal plan for the week.
+- Shopping List: Users can generate a shopping list based on the recipes they have added to their meal plan.
+- Recipe Search: Users can search for recipes based on keywords, ingredients, or categories.
+- Reviews and Ratings: Users can leave reviews and ratings for recipes they have tried.
+- Social Sharing: Users can share their favorite recipes on social media platforms.
+- Notifications: Users can receive notifications when someone likes or comments on their recipe.
+- Admin Dashboard: An admin dashboard can be created to manage user accounts and recipe submissions.
 
-## Structure
+# Installation
+To run FoodFactor on your local machine, follow these steps:
+1. Clone the repository. 
+2. Create and activate a virtual environment.
+  `python -m venv env`
+`source env/bin/activate`
+3. Install the required packages using pip.
+  `pip install -r requirements.txt`
+4. Run database migrations.
+  `python manage.py migrate`
+5. Create a superuser account for admin access.
+  `python manage.py createsuperuser`
+6. Start the development server.
+  `python manage.py runserver`
+  
+ # Wire Frames & Entity Relationship Diagram 
+ ### Log In
+ ![image](https://user-images.githubusercontent.com/106713788/223487710-466ddf42-beb1-4e53-becd-e691f9206706.png)
+ ### Home
+ ![image](https://user-images.githubusercontent.com/106713788/223487483-3d889d32-339d-4173-b986-5e327974140c.png)
+ ### Show
+ ![image](https://user-images.githubusercontent.com/106713788/223487394-90694547-d86e-49c4-911a-241d0f0f13c2.png)
 
-Dependencies are stored in [`package.json`](package.json).
+ ### Entity Relationship Diagram (ERD)
+ In the context of the FoodFactor project, here's what our ERD might look like:
+ 
+ ![image](https://user-images.githubusercontent.com/106713788/223472494-46487e25-61c2-426f-9e65-94687d323162.png)
+ 
+ This ERD has four entities: users, recipes, reviews, and ingredients. The relationships between these entities are as follows:
+- A user can create many recipes, but a recipe can only be created by one user (one-to-many relationship).
+- A recipe can have many reviews, and a review can belong to only one recipe (one-to-many relationship).
+- A recipe can have many ingredients, and an ingredient can be used in many recipes (many-to-many relationship).
 
-The most important file for understanding the structure of the template is
-`server.js`. This is where the actual Express `app` object is created, where
-the middlewares and routes are registered, and more. To register a routefile,
-follow the pattern established here with `exampleRoutes` and `userRoutes`. If
-you want to add any middlewares to your app, do that here.
+Each entity has its own set of attributes that define the information that can be stored in it. For example, the users entity has attributes like username, email, and password that store user account information, while the recipes entity has attributes like title, description, and image that store recipe details.
 
-The `app` directory contains models and route files. Models are simply Mongoose
-models. To create your own, follow the patterns established in
-`app/models/example.js`. Route files are somewhat similar to controllers in
-Rails, but they cover more functionality, including serialization and deciding
-which HTTP verbs to accept and what to do with them.
-
-The `config` directory holds just `db.js`, which is where you specify the name
-and URL of your database.
-
-The `lib` directory is for code that will be used in other places in the
-application. The token authentication code is stored in `lib/auth.js`. The
-other files in `lib` deal with error handling. `custom_errors.js` is where all
-the different custom classes of errors are created. If you need some other kind
-of error message, you can add it here. There are also some functions defined
-here that are used elsewhere to check for errors. `lib/error_handler.js` is a
-function that will be used in all your `.catch`es. It catches errors, and sets
-the response status code based on what type of error got thrown.
-
-You probably will only need to interact with files in `app/models`,
-`app/routes`, and `server.js`. You'll need to edit `db/config.js` just once,
-to change the name of your app.
-
-## API
-
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
-
-Scripts are included in [`curl-scripts`](curl-scripts) to test built-in actions. Feel free to use Postman for testing, using the curl scripts listed below and in the folder for setting up headers and request bodies.
-Add your own scripts to test your custom API.
-
-### Authentication
-
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/` | `users#changepw`  |
-| DELETE | `/sign-out/`        | `users#signout`   |
-
-#### POST /sign-up
-
-Request:
-
-```sh
-curl --include --request POST http://localhost:8000/sign-up \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password",
-      "password_confirmation": "an example password"
-    }
-  }'
-```
-
-```sh
-curl-scripts/sign-up.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email"
-  }
-}
-```
-
-#### POST /sign-in
-
-Request:
-
-```sh
-curl --include --request POST http://localhost:8000/sign-in \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password"
-    }
-  }'
-```
-
-```sh
-curl-scripts/sign-in.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email",
-    "token": "33ad6372f795694b333ec5f329ebeaaa"
-  }
-}
-```
-
-#### PATCH /change-password/
-
-Request:
-
-```sh
-curl --include --request PATCH http://localhost:8000/change-password/ \
-  --header "Authorization: Bearer $TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "an example password",
-      "new": "super sekrit"
-    }
-  }'
-```
-
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa curl-scripts/change-password.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/
-
-Request:
-
-```sh
-curl --include --request DELETE http://localhost:8000/sign-out/ \
-  --header "Authorization: Bearer $TOKEN"
-```
-
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa curl-scripts/sign-out.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
+# Routes
