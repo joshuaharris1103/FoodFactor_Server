@@ -2,19 +2,23 @@ const mongoose = require('mongoose')
 
 const recipeSchema = new mongoose.Schema({
     username:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-        required:true
-    },
-    body:{
         type: 'string',
         required:true
     },
-    image:{
+    caption:{
         type: 'string',
         required:true
     },
-}, {timestamps: true}
+    imageUrl:{
+        type: 'string',
+        required:true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+},
+
 )
 
-mongoose.model('recipe', recipeSchema)
+module.exports = mongoose.model('Recipe', recipeSchema)
