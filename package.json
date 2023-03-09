@@ -1,11 +1,12 @@
 {
-  "name": "Food Factor",
+  "name": "food-factor",
   "version": "1.0.0",
   "description": "A social media platform for sharing recipes and meal ideas",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node ./app/models/seed.js"
   },
   "author": "Joshua Harris",
   "license": "ISC",

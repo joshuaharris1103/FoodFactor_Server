@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const Post = require('./post')
+const Recipe = require('./recipe')
 const db = require('../../config/db')
 
-const startPosts = [
+const startRecipes = [
 {username:"Christiano",
 caption: 'I love meal prep on sundays!',
 imageUrl: 'https://media.istockphoto.com/id/1136168094/photo/chicken-teriyaki-meal-prep-lunch-box-containers-with-broccoli-rice-and-carrots.jpg?s=612x612&w=0&k=20&c=WNAaGFVX-Kt3l_wrw02Gz6UEg1KOJPByQUYwecIOodc='},
@@ -24,13 +24,13 @@ mongoose.connect(db, {
     useNewUrlParser: true
 })
     .then(() => {
-        Post.deleteMany()
-            .then(deletedPosts => {
-                console.log('the deleted posts:', deletedPosts)
-                // now we add our posts to the db
-                Post.create(startPosts)
-                    .then(newPosts => {
-                        console.log('the new posts', newPosts)
+        Recipe.deleteMany()
+            .then(deletedRecipes => {
+                console.log('the deleted recipes:', deletedRecipes)
+                // now we add our recipes to the db
+                Recipe.create(startRecipes)
+                    .then(newRecipes => {
+                        console.log('the new recipes', newRecipes)
                         mongoose.connection.close()
                     })
                     .catch(error => {
