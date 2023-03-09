@@ -69,9 +69,9 @@ app.use(requestLogger)
 
 // register route files
 app.use(recipeRoutes)
-app.use(ingredientRoutes)
-app.use(mealplanRoutes)
-app.use(reviewRoutes)
+// app.use(ingredientRoutes)
+// app.use(mealplanRoutes)
+// app.use(reviewRoutes)
 app.use(userRoutes)
 
 // register error handling middleware
