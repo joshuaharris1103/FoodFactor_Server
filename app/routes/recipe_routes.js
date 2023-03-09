@@ -12,7 +12,7 @@ const router = express.Router()
 
 // INDEX
 // GET /recipes
-router.get('/recipes', requireToken, (req, res, next) => {
+router.get('/', requireToken, (req, res, next) => {
 	Recipe.find()
 		.then((recipes) => {
 			return recipes.map((recipe) => recipe.toObject())
@@ -23,7 +23,7 @@ router.get('/recipes', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
-// SHOW
+// SHOW **************(may change to /userId/:id)***********
 // GET /recipes/5a7db6c74d55bc51bdf39793
 router.get('/recipes/:id', requireToken, (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
