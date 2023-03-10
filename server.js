@@ -7,7 +7,7 @@ const cors = require('cors')
 const recipeRoutes = require('./app/routes/recipe_routes')
 const ingredientRoutes = require('./app/routes/ingredient_routes')
 const mealplanRoutes = require('./app/routes/mealplan_routes')
-const reviewRoutes = require('./app/routes/review_routes')
+const commentRoutes = require('./app/routes/comment_routes')
 const userRoutes = require('./app/routes/user_routes')
 
 // require middleware

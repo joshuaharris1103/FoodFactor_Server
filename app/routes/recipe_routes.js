@@ -12,7 +12,7 @@ const router = express.Router()
 
 // INDEX
 // GET /recipes
-router.get('/', requireToken, (req, res, next) => {
+router.get('/recipes', requireToken, (req, res, next) => {
 	Recipe.find()
 		.then((recipes) => {
 			return recipes.map((recipe) => recipe.toObject())

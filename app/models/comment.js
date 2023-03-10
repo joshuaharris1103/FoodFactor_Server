@@ -2,12 +2,12 @@ const { Timestamp } = require('mongodb')
 const mongoose = require('mongoose')
 
 
-const reviewSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
     {
-        comment: {
+        text: {
             type: String
         },
-        owner: {
+        postedBy: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'
             // required: true
@@ -15,4 +15,4 @@ const reviewSchema = new mongoose.Schema(
 }, {timestamps: true}
 )
 
-module.exports = reviewSchema
+module.exports = commentSchema
