@@ -35,6 +35,18 @@ router.get('/recipes/:id', requireToken, (req, res, next) => {
 		.catch(next)
 })
 
+// Show My Posts
+// router.get('/myrecipes/', requireToken, (req, res, next) => {
+// 	// req.params.id will be set based on the `:id` in the route
+// 	Recipe.find({postedBy:req.user.id})
+// 		.populate('postedBy','_id name')
+// 		.then(handle404)
+// 		// if `findById` is succesful, respond with 200 and "recipe" JSON
+// 		.then((recipe) => res.status(200).json({ recipe: recipe.toObject() }))
+// 		// if an error occurs, pass it to the handler
+// 		.catch(next)
+// })
+
 // CREATE
 // POST /recipes
 router.post('/recipes', requireToken, (req, res, next) => {

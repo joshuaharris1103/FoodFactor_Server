@@ -26,7 +26,7 @@ router.put('/like', requireToken, (req, res) => {
 
 router.put('/unlike', requireToken, (req, res) => {
     Recipe.findByIdAndUpdate(req.body.recipeId, {
-        $push: {
+        $pull: {
             likes: req.user._id
         }
     }, {

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const commentSchema = require('./comment')
+const likesSchema = require('./likes')
 const ingredientSchema = require('./ingredient')
 
 
@@ -12,11 +13,12 @@ const recipeSchema = new mongoose.Schema({
             type: 'string',
             // required:true
         },
-        imageUrl: {
+        image: {
             type: 'string',
             default: 'no photo',
         },
         comment: [commentSchema],
+        likes: [likesSchema],
         // ingredient: [ingredientSchema],
         postedBy: {
             type: mongoose.Schema.Types.ObjectId,
