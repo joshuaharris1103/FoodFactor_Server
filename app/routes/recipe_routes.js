@@ -47,11 +47,11 @@ router.get('/recipes', (req, res, next) => {
 
 // SHOW
 // GET /recipes/5a7db6c74d55bc51bdf39793
-router.get('/recipes/:id', (req, res, next) => {
+router.get('/recipes/:id', requireToken, (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Recipe.findById(req.params.id)
-		console.log('req.params', req.params.id)
-		// .populate('owner')
+		
+		.populate('owner')
 		.then(handle404)
 		// if `findById` is succesful, respond with 200 and "recipe" JSON
 		.then((recipe) => res.status(200).json({ recipe: recipe.toObject() }))
