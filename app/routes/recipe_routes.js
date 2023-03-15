@@ -81,14 +81,14 @@ router.post('/recipes', requireToken, (req, res, next) => {
 // PATCH /recipes/5a7db6c74d55bc51bdf39793
 // removeBlanks is middleware that doesn't allow you to overwrite any data with an empty string(or empty value)
 router.patch('/recipes/:id', requireToken, removeBlanks, (req, res, next) => {
-	// if the client attempts to change the `owner` property by including a new
-	// owner, prevent that by deleting that key/value pair
-	console.log ('hey look, req.body:', req.body.recipe)
-	delete req.body.recipe.owner
+	// console.log ('hey look, req.body:', req.user)
+	// console.log ('hey look, owner:', req.user.id)
+	delete req.user
 
 	Recipe.findById(req.params.id)
 		.then(handle404)
 		.then((recipe) => {
+			console.log('this is req', req.params.id)
 			// pass the `req` object and the Mongoose record to `requireOwnership`
 			// it will throw an error if the current user isn't the owner
 			requireOwnership(req, recipe)
@@ -105,11 +105,14 @@ router.patch('/recipes/:id', requireToken, removeBlanks, (req, res, next) => {
 // DESTROY
 // DELETE /recipes/5a7db6c74d55bc51bdf39793
 router.delete('/recipes/:id', requireToken, (req, res, next) => {
-	Recipe.findById(req.params.id)
+	console.log('req.user:', req.user)
+
+	Recipe.findOne({_id:req.params.id})
 		.then(handle404)
 		.then((recipe) => {
+			req.user = recipe.owner
 			// throw an error if current user doesn't own `recipe`
-			requireOwnership(req, recipe)
+			// requireOwnership(req, recipe)
 			// delete the recipe ONLY IF the above didn't throw
 			recipe.deleteOne()
 		})
@@ -118,5 +121,6 @@ router.delete('/recipes/:id', requireToken, (req, res, next) => {
 		// if an error occurs, pass it to the handler
 		.catch(next)
 })
+
 
 module.exports = router
