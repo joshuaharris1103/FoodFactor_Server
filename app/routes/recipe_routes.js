@@ -25,9 +25,10 @@ router.get('/recipes', requireToken, (req, res, next) => {
 
 // SHOW **************(may change to /userId/:id)***********
 // GET /recipes/5a7db6c74d55bc51bdf39793
-router.get('/recipes/:id', requireToken, (req, res, next) => {
+router.get('/recipes/:id', (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Recipe.findById(req.params.id)
+	
 		.then(handle404)
 		// if `findById` is succesful, respond with 200 and "recipe" JSON
 		.then((recipe) => res.status(200).json({ recipe: recipe.toObject() }))
@@ -62,15 +63,15 @@ router.post('/recipes', requireToken, (req, res, next) => {
 
 // UPDATE
 // PATCH /recipes/5a7db6c74d55bc51bdf39793
-router.patch('/recipes/:id', requireToken, removeBlanks, (req, res, next) => {
-	delete req.body.recipe.owner
+router.patch('/recipes/:id', requireToken, (req, res, next) => {
+		console.log ('hey look, req.body:', req.body.recipe)
+		delete req.body.recipe.owner
 	Recipe.findById(req.params.id)
-		.then(handle404)
-		.then((recipe) => {
-			// pass the `req` object and the Mongoose record to `requireOwnership`
-			// it will throw an error if the current user isn't the owner
-			requireOwnership(req, recipe)
-
+	.then(handle404)
+	.then((recipe) => {
+		// pass the `req` object and the Mongoose record to `requireOwnership`
+		// it will throw an error if the current user isn't the owner
+		requireOwnership(req, recipe)
 			// pass the result of Mongoose's `.update` to the next `.then`
 			return recipe.updateOne(req.body.recipe)
 		})

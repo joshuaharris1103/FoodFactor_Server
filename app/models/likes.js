@@ -6,7 +6,7 @@ const likesSchema = new mongoose.Schema(
         text: {
             type: String
         },
-        postedBy: {
+        owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User'
             // required: true

@@ -7,7 +7,7 @@ const ingredientSchema = require('./ingredient')
 const recipeSchema = new mongoose.Schema({
         recipeName: {
             type: 'string',
-            // required:true
+            required:true
         },
         caption: {
             type: 'string',
@@ -20,7 +20,7 @@ const recipeSchema = new mongoose.Schema({
         comment: [commentSchema],
         likes: [likesSchema],
         // ingredient: [ingredientSchema],
-        postedBy: {
+        owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
